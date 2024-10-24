@@ -20,8 +20,19 @@ jobs:
           java-version: '21'
           distribution: 'adopt'
 
-      - name: Build and test
-        run: mvn clean test #Esse comando ai rodar os testes
+      - name: Build project
+        run: mvn clean install # Compila o projeto e resolve dependências
+
+      - name: Start API
+        run: mvn spring-boot:run -Dspring-boot.run.fork=false & # Inicia a API localmente em background
+
+      - name: Wait for API to be ready
+        run: |
+          echo "Aguardando API..."
+          sleep 15 # Dá um tempo para a API iniciar
+
+      - name: Run tests
+        run: mvn clean test # Executa os testes após a API estar ativa
 
   deploy:
     runs-on: ubuntu-latest
@@ -33,4 +44,4 @@ jobs:
       - name: Deploy application
         run: |
           echo "Deploying application..."
-          # Adicione aqui seu comando de deploy
+          # Adicione aqui seu comando de deploy (seja para um ambiente cloud, um servidor ou outro)
