@@ -1,19 +1,19 @@
 # language: pt
 @regressivo
-Funcionalidade: Validar o contrato ao realizar um cadastro bem-sucedido de entrega
+Funcionalidade: Validar o contrato ao realizar um cadastro bem-sucedido de desastre
   Como usuário da API
-  Quero cadastrar uma nova entrega bem-sucedido
-  Para que eu cosniga validar se o contrato esta conforme o esperado
+  Quero cadastrar um novo desastre com sucesso
+  Para que eu consiga validar se o contrato está conforme o esperado
 
-  Cenario: Validar contrato do cadastro bem-sucedido de entrega
-    Dado que eu tenha os seguintes dados da entrega:
-      | campo          | valor        |
-      | numeroPedido   | 1            |
-      | nomeEntregador | Ana Silva    |
-      | statusEntrega  | EM_SEPARACAO |
-      | dataEntrega    | 2024-08-22   |
-    Quando eu enviar a requisição para o endpoint "/entregas" de cadastro de entregas
+  Cenário: Validar contrato do cadastro bem-sucedido de desastre
+    Dado que eu tenha os seguintes dados do desastre:
+      | campo          | valor          |
+      | numeroEvento   | 1              |
+      | tipoDesastre   | Inundação      |
+      | local          | Cidade X       |
+      | statusDesastre | EM_ANDAMENTO   |
+      | dataEvento     | 2024-08-22     |
+    Quando eu enviar a requisição para o endpoint "/desastres" de cadastro de desastres
     Então o status code da resposta deve ser 201
-    E que o arquivo de contrato esperado é o "Cadastro bem-sucedido de entrega"
+    E que o arquivo de contrato esperado é o "Cadastro bem-sucedido de desastre"
     Então a resposta da requisição deve estar em conformidade com o contrato selecionado
-

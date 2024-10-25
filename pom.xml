@@ -62,20 +62,28 @@
             <version>20240303</version>
         </dependency>
 
-        <!-- Spring Boot Starter (para rodar a aplicação) -->
+        <!-- Spring Boot Starter -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
-            <version>3.1.4</version> <!-- ajuste a versão conforme necessário -->
+            <version>3.1.4</version> <!-- Versão alinhada com as outras dependências -->
         </dependency>
 
-        <!-- Spring Boot Starter Test (caso precise para testes no contexto Spring) -->
+        <!-- Spring Boot Starter Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <version>3.1.4</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Jackson Databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.18.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -84,7 +92,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>3.1.4</version> <!-- Alinhado com o Spring Boot -->
                 <configuration>
                     <mainClass>org.example.testesautomatizados.TestesAutomatizadosApplication</mainClass>
                 </configuration>
