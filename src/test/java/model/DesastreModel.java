@@ -1,18 +1,32 @@
 package model;
 
-import com.google.gson.annotations.Expose;
-import lombok.Data;
-
-@Data
 public class DesastreModel {
-    @Expose
-    private int numeroEvento; // Mantém apenas este campo
-    @Expose
+    private int numeroEvento;
     private String tipoDesastre;
-    @Expose
     private String local;
-    @Expose
     private String statusDesastre;
-    @Expose
     private String dataEvento;
+
+    // Getters e Setters
+    public void setNumeroEvento(int numeroEvento) {
+        this.numeroEvento = numeroEvento;
+    }
+
+    public void setTipoDesastre(String tipoDesastre) {
+        this.tipoDesastre = tipoDesastre;
+    }
+
+    public void setLocal(String local) {
+        this.local = local;
+    }
+
+    public void setStatusDesastre(String statusDesastre) {
+        this.statusDesastre = statusDesastre;
+    }
+
+    public void setDataEvento(String dataEvento) {
+        this.dataEvento = dataEvento;
+    }
+
+    // Outros métodos e construtores, se necessário
 }
