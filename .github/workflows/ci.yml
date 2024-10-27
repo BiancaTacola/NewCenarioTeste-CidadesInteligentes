@@ -1,0 +1,47 @@
+name: Continuous Integration
+
+on:
+  pull_request:  # Aciona para pull requests
+  push:          # Aciona para pushs
+    branches:
+      - '*'  # Isso significa qualquer branch
+
+jobs:
+  continuous-integration:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '21'
+          distribution: 'adopt'
+
+      - name: Build project
+        run: mvn clean install # Compila o projeto e resolve dependências
+
+      - name: Start API
+        run: mvn spring-boot:run -Dspring-boot.run.fork=false & # Inicia a API localmente em background
+
+      - name: Wait for API to be ready
+        run: |
+          echo "Aguardando API..."
+          sleep 15 # Dá um tempo para a API iniciar
+
+      - name: Run tests
+        run: mvn clean test # Executa os testes após a API estar ativa
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: continuous-integration  # Esse job depende do anterior
+
+    if: success()  # Esse job só será executado se o job anterior for bem-sucedido
+
+    steps:
+      - name: Deploy application
+        run: |
+          echo "Deploying application..."
+          # Adicione aqui seu comando de deploy (seja para um ambiente cloud, um servidor ou outro)
