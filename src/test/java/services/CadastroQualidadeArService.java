@@ -3,13 +3,12 @@ package services;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import io.restassured.http.ContentType;
-import io.restassured.response.Response;
-import model.DesastreModel;
 import com.networknt.schema.JsonSchema;
 import com.networknt.schema.JsonSchemaFactory;
 import com.networknt.schema.ValidationMessage;
+import io.restassured.http.ContentType;
+import model.QualidadeArModel;
+import io.restassured.response.Response;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,52 +17,57 @@ import java.util.Set;
 
 import static io.restassured.RestAssured.given;
 
-public class CadastroDesastresService {
+public class CadastroQualidadeArService {
 
-    final DesastreModel desastreModel = new DesastreModel();
-    public final Gson gson = new GsonBuilder()
-            .excludeFieldsWithoutExposeAnnotation()
-            .create();
+    private final QualidadeArModel qualidadeArModel = new QualidadeArModel();
     public Response response;
-    String baseUrl = "http://localhost:8080";
-    private String contractPath;
+    public final Gson gson = new Gson(); // Inicializando o Gson
+    private String baseUrl = "http://localhost:8080"; // Exemplo de URL base
+    private String contractPath; // Adicionando a variável para o caminho do contrato
 
     public void setFieldsEvent(String field, String value) {
         switch (field) {
-            case "numeroEvento" -> desastreModel.setNumeroEvento(Integer.parseInt(value));
-            case "tipoDesastre" -> desastreModel.setTipoDesastre(value);
-            case "local" -> desastreModel.setLocal(value);
-            case "statusDesastre" -> desastreModel.setStatusDesastre(value);
-            case "dataEvento" -> desastreModel.setDataEvento(value);
+            case "numeroEvento" -> qualidadeArModel.setNumeroEvento(Integer.parseInt(value));
+            case "tipoEvento" -> qualidadeArModel.setTipoEvento(value);
+            case "local" -> qualidadeArModel.setLocal(value);
+            case "nivelPoluicao" -> qualidadeArModel.setNivelPoluicao(Integer.parseInt(value));
+            case "dataEvento" -> qualidadeArModel.setDataEvento(value);
             default -> throw new IllegalStateException("Unexpected field " + field);
         }
     }
 
     public void createEvent(String endPoint) {
         String url = baseUrl + endPoint;
-        String bodyToSend = gson.toJson(desastreModel);
+        String bodyToSend = gson.toJson(qualidadeArModel);
 
         // Log dos dados a serem enviados
         System.out.println("Enviando dados: " + bodyToSend);
 
-        response = given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .body(bodyToSend)
-                .when()
-                .post(url)
-                .then()
-                .extract()
-                .response();
+        try {
+            response = given()
+                    .contentType(ContentType.JSON)
+                    .accept(ContentType.JSON)
+                    .body(bodyToSend)
+                    .when()
+                    .post(url)
+                    .then()
+                    .extract()
+                    .response();
 
-        // Log para verificar a resposta
-        System.out.println("Resposta da API: " + response.asString());
+            // Log para verificar a resposta
+            System.out.println("Resposta da API: " + response.asString());
 
-        // Log para depuração em caso de erro
-        if (response.statusCode() != 201) {
-            System.out.println("Erro ao criar evento: " + response.asString());
+            // Log para depuração em caso de erro
+            if (response.statusCode() != 201) {
+                System.out.println("Erro ao criar evento: " + response.asString());
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao enviar requisição: " + e.getMessage());
+            response = null; // Define response como nulo em caso de erro
         }
     }
+
+
 
     // Método para definir o caminho do contrato
     public void setContract(String contract) {
