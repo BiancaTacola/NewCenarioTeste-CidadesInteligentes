@@ -42,6 +42,10 @@ public class CadastroDesastresService {
     public void createEvent(String endPoint) {
         String url = baseUrl + endPoint;
         String bodyToSend = gson.toJson(desastreModel);
+
+        // Log dos dados a serem enviados
+        System.out.println("Enviando dados: " + bodyToSend);
+
         response = given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
@@ -51,6 +55,14 @@ public class CadastroDesastresService {
                 .then()
                 .extract()
                 .response();
+
+        // Log para verificar a resposta
+        System.out.println("Resposta da API: " + response.asString());
+
+        // Log para depuração em caso de erro
+        if (response.statusCode() != 201) {
+            System.out.println("Erro ao criar evento: " + response.asString());
+        }
     }
 
     // Método para definir o caminho do contrato
