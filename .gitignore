@@ -1,18 +1,31 @@
-target/
+# Ignora tudo
+*
+
+# Exceto README.md
+!README.md
+
+# Permite o Maven Wrapper
+!.mvn/
 !.mvn/wrapper/maven-wrapper.jar
+
+# Diretórios específicos de build que deseja manter
 !**/src/main/**/target/
 !**/src/test/**/target/
+!**/src/main/**/build/
+!**/src/test/**/build/
 
-### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
+# Permite Docker Compose e Dockerfile
+!docker-compose.yml
+!Dockerfile
+
+# Permite configurações do VS Code
+!.vscode/
+
+# Ignora IntelliJ IDEA, Eclipse e NetBeans (exceto se desejar incluir algum)
+.idea/
 *.iws
 *.iml
 *.ipr
-
-### Eclipse ###
 .apt_generated
 .classpath
 .factorypath
@@ -20,19 +33,11 @@ target/
 .settings
 .springBeans
 .sts4-cache
-
-### NetBeans ###
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
 
-### VS Code ###
-.vscode/
-
-### Mac OS ###
+# Ignora arquivos específicos do Mac OS
 .DS_Store
