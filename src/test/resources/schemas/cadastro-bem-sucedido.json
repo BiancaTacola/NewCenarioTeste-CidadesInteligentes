@@ -1,55 +1,7 @@
 {
-  "definitions": {},
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://example.com/desastre.json",
-  "title": "CadastroDesastre",
-  "type": "object",
-  "required": [
-    "numeroEvento",
-    "tipoDesastre",
-    "local",
-    "statusDesastre",
-    "dataEvento"
-  ],
-  "properties": {
-    "numeroEvento": {
-      "$id": "#root/numeroEvento",
-      "title": "NumeroEvento",
-      "type": "integer",
-      "examples": [1],
-      "default": 0
-    },
-    "tipoDesastre": {
-      "$id": "#root/tipoDesastre",
-      "title": "TipoDesastre",
-      "type": "string",
-      "examples": ["Enchente"],
-      "default": "",
-      "enum": ["Enchente", "Incêndio", "Terremoto", "Deslizamento"]
-    },
-    "local": {
-      "$id": "#root/local",
-      "title": "Local",
-      "type": "string",
-      "examples": ["São Paulo"],
-      "default": "",
-      "pattern": "^.*$"
-    },
-    "statusDesastre": {
-      "$id": "#root/statusDesastre",
-      "title": "StatusDesastre",
-      "type": "string",
-      "examples": ["EM_MONITORAMENTO"],
-      "default": "",
-      "enum": ["EM_MONITORAMENTO", "CONTIDO", "RESOLVIDO", "EM_ALERTA"]
-    },
-    "dataEvento": {
-      "$id": "#root/dataEvento",
-      "title": "DataEvento",
-      "type": "string",
-      "examples": ["2024-08-22"],
-      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
-      "format": "date"
-    }
-  }
+  "dataEvento": "2024-08-22",
+  "local": "São Paulo",
+  "numeroEvento": 1,
+  "statusDesastre": "EM_MONITORAMENTO",
+  "tipoDesastre": "Enchente"
 }
