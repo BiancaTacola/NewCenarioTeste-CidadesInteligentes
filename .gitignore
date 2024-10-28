@@ -1,14 +1,21 @@
+# Ignora tudo
+*
+
+# Exceto README.md
+!README.md
+
+# Permite o Maven Wrapper
+!.mvn/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Ignora Docker Compose e Dockerfile
+docker-compose.yml
+Dockerfile
+
 # Diretório Target
 target/
 !**/src/main/**/target/
 !**/src/test/**/target/
-
-# Maven Wrapper
-!.mvn/wrapper/maven-wrapper.jar
-
-# Docker
-docker-compose.yml
-Dockerfile
 
 # IntelliJ IDEA
 .idea/
@@ -27,10 +34,10 @@ Dockerfile
 
 # NetBeans
 /nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
